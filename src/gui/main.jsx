@@ -2,12 +2,17 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Test from './pages/test/test'
 
 function Main() {
 
 	return (
 		<>
-			<Router></Router>
+			<Router>
+				<Routes>
+					<Route element={<Test />} path="/" exact />
+				</Routes>
+			</Router>
 		</>
 	);
 }
