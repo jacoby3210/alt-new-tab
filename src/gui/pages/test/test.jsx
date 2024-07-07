@@ -4,17 +4,24 @@ import Common from "react-common"
 
 const Test = (props) => {
 
+	//  helpers
+	const produceEntries = (count, func) => {return Array.from(new Array(count), func);}
+
+	// basics
+	const pathProps = {data: "/test/3",};
+	const popupProps = {shown: true,};
+	
+	// advisor
+	const advisorProps = {
+		data: produceEntries(5, (v, i) => {return { caption: `Option #${i}`, value: i}}),
+	}
+
 	// dropdown
-	const dropdownParams = {
-		dataSource: [
-			{ name: "Option #0", value: 0 },
-			{ name: "Option #1", value: 1 },
-			{ name: "Option #2", value: 2 },
-			{ name: "Option #3", value: 3 },
-			{ name: "Option #4", value: 4 },
-		],
+	const dropdownProps = {
+		data: produceEntries(5, (v, i) => {return { caption: `Option #${i}`, value: i}}),
 		value: 0
 	}
+
 	// paginator
 	// const [from, setFrom] = useState(0);
 	// const handleChangePage = (pageIndex) => {
@@ -31,17 +38,30 @@ const Test = (props) => {
 
 	// // slider
 
-	// // tabs
-	// const [currentTab, setCurrentTab] = useState(0);
-	// const tabControllerProps = {
-	// 	list: Array(10).fill({ id: 0, name: "string" }),
-	// 	onChangeCallback: (tabIndex) => { setCurrentTab(tabIndex) },
-	// }
+	// Tab Controller
+	const [currentTab, setCurrentTab] = useState(0);
+	const tabControllerProps = {
+		data: produceEntries(5, (v, i) => {return { caption: `Option #${i}`, id: i}}),
+		onChangeCallback: (tabIndex) => { setCurrentTab(tabIndex) },
+	}
+	const viewPropsFotTabController = {
+		count: 250,
+		from: currentTab,
+		data: Array.from({ length: 250 }, (_, i) => { return { text: `string_${i}` } }),
+		range: 1,
+	}
+	
 	// render page
 	return (
 		<>
-			<Common.Path value="/test/3" />
-			<Common.Dropdown {...dropdownParams} />
+			<Common.Path {...pathProps} />
+			<Common.Popup {...popupProps} />
+			<Common.Advisor {...advisorProps} />
+			<Common.Dropdown {...dropdownProps} />
+
+
+			<Common.TabController {...tabControllerProps}/>
+			<Common.View  {...viewPropsFotTabController}/>
 		</>
 	);
 }
