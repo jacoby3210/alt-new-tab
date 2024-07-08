@@ -6,7 +6,15 @@ const Test = (props) => {
 
 	//  helpers
 	const produceEntries = (count, func) => {return Array.from(new Array(count), func);}
+	const area = React.useRef(null)
+	const TestAreaForScroll = () => 
+		<div style={{height:"100px", overflow:"scroll"}} ref={area}>
+			<div style={{height:"200px"}}/>
+		</div>
 
+	const scrollProps = {
+		target: area,
+	}
 	// basics
 	const pathProps = {data: "/test/3",};
 	const popupProps = {shown: true,};
@@ -71,6 +79,9 @@ const Test = (props) => {
 			<Common.Popup {...popupProps} />
 			<Common.Advisor {...advisorProps} />
 			<Common.Dropdown {...dropdownProps} />
+
+			<TestAreaForScroll/>
+			<Common.Scroll {...scrollProps}/>
 
 			<Common.CarouselController {...carouselControllerProps}/>
 			<Common.View  {...viewPropsForCarouselController}/>
