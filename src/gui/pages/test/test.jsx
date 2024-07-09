@@ -8,7 +8,7 @@ const Test = (props) => {
 	const produceEntries = (count, func) => {return Array.from(new Array(count), func);}
 	const area = React.useRef(null)
 	const TestAreaForScroll = () => 
-		<div style={{height:"100px", overflow:"scroll"}} ref={area}>
+		<div style={{height:"100px", "overflow-y":"scroll"}} ref={area}>
 			<div style={{height:"200px"}}/>
 		</div>
 
