@@ -1,13 +1,21 @@
 
 import React, { useState } from 'react';
 import Common from "react-common"
+import "./test.css"
 
 const Test = (props) => {
 
 	//  helpers
-	const produceEntries = (count, func) => { return Array.from(new Array(count), func); }
+	const produceEntries = (count, func) => {
+		return Array.from(new Array(count), func);
+	}
 
 	// basics
+	const indicatorProps = {
+		colors: ["green", "orange", "red"],
+		levels: [100, 60, 25],
+		value: 50
+	};
 	const pathProps = { data: "/test/3", };
 	const popupProps = { shown: true, };
 
@@ -16,6 +24,10 @@ const Test = (props) => {
 		data: produceEntries(5, (v, i) => { return { caption: `Option #${i}`, value: i } }),
 		value: 0
 	}
+
+	// range
+	const rangeHorizontalProps = { axis: true, min: 0, max: 10, step: 0.0001, value: 5 };
+	const rangeVerticalProps = { min: 0, max: 50, step: 0.0001, value: 5 };
 
 	// scroll
 	const area = React.useRef(null)
@@ -81,10 +93,13 @@ const Test = (props) => {
 	// render page
 	return (
 		<>
+			<Common.Indicator {...indicatorProps} />
 			<Common.Path {...pathProps} />
 			<Common.Popup {...popupProps} />
 
 			<Common.Dropdown {...dropdownProps} />
+			<Common.Range {...rangeHorizontalProps} />
+			<Common.Range {...rangeVerticalProps} />
 			<Common.Scroll {...scrollProps} />
 			<TestAreaForScroll />
 
